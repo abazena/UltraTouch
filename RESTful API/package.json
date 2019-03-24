@@ -1,0 +1,15 @@
+{
+  "name": "restful-api",
+  "version": "1.0.0",
+  "description": "simple api to be used as the communication channel between users and the UltraTouch device",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abd-arahman Bazena",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
