@@ -3,7 +3,7 @@
 //
 // Circle - A C++ bare metal environment for Raspberry Pi
 // Copyright (C) 2014-2019  R. Stange <rsta2@o2online.de>
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -24,11 +24,17 @@
 #include <circle/types.h>
 
 #define GPIO_PINS	54
+#define GPIO_PIN_ONE 5
+#define GPIO_PIN_TWO 2
+#define GPIO_PIN_THREE 3
+#define LOW LOW
+#define HIGH HIGH
 
 enum TGPIOVirtualPin
 {
 	GPIOPinAudioLeft	= GPIO_PINS,
 	GPIOPinAudioRight,
+	GPIOPinOne = GPIO_PIN_ONE,
 	GPIOPinUnknown
 };
 
@@ -81,7 +87,7 @@ public:
 	/// \param bInitPin Also init pullup/down mode and output level
 	void SetMode (TGPIOMode	Mode,
 		      boolean	bInitPin = TRUE);
-	
+
 	/// \param nValue Value to be written to the pin (LOW or HIGH)
 	void Write (unsigned nValue);
 	/// \return Value read from pin (LOW or HIGH)

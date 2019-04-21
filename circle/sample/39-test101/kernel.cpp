@@ -3,7 +3,7 @@
 //
 // Circle - A C++ bare metal environment for Raspberry Pi
 // Copyright (C) 2016  R. Stange <rsta2@o2online.de>
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -33,15 +33,21 @@ boolean CKernel::Initialize (void)
 {
 	return TRUE;
 }
+void CKernel:: Setup(void)
+{
+	CGPIOPin GpioOne (GPIOPinOne, GPIOModeOutput);
+	GpioOne.Invert();
+}
 
 TShutdownMode CKernel::Run (void)
 {
 	CGPIOPin AudioLeft (GPIOPinAudioLeft, GPIOModeOutput);
 	CGPIOPin AudioRight (GPIOPinAudioRight, GPIOModeOutput);
-	
+
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
-	for (unsigned i = 1; i <= 10; i++)
+	for (unsigned i = 1; i <= 1000; i++)
 	{
+		Setup();
 		m_ActLED.On ();
 		AudioLeft.Invert ();
 		AudioRight.Invert ();
