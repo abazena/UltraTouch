@@ -33,10 +33,11 @@ boolean CKernel::Initialize (void)
 {
 	return TRUE;
 }
-void CKernel:: Setup(void)
+boolean Setup(void)
 {
 	CGPIOPin GpioOne (GPIOPinOne, GPIOModeOutput);
 	GpioOne.Invert();
+        return TRUE;
 }
 
 TShutdownMode CKernel::Run (void)

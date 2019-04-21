@@ -27,8 +27,6 @@
 #define GPIO_PIN_ONE 5
 #define GPIO_PIN_TWO 2
 #define GPIO_PIN_THREE 3
-#define LOW LOW
-#define HIGH HIGH
 
 enum TGPIOVirtualPin
 {
