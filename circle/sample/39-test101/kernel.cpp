@@ -44,13 +44,13 @@ TShutdownMode CKernel::Run (void)
 {
 	CGPIOPin AudioLeft (GPIOPinAudioLeft, GPIOModeOutput);
 	CGPIOPin AudioRight (GPIOPinAudioRight, GPIOModeOutput);
-	CGPIOPin GPIOOne (GPIOPinOne , GPIOModeOutput);
+	CGPIOPin GPIOOne (5 , GPIOModeOutput);
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
 	for (unsigned i = 1; i <= 1000; i++)
 	{
-		GPIOOne.Write(LOW);
+		GPIOOne.Invert();
 		CTimer::SimpleMsDelay(500);
-		GPIOOne.Write(HIGH);
+		GPIOOne.Invert();
 		CTimer::SimpleMsDelay(5000);
 		m_ActLED.On ();
 		AudioLeft.Invert ();
