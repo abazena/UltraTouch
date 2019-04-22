@@ -20,7 +20,7 @@
 #include "kernel.h"
 #include <circle/gpiopin.h>
 #include <circle/timer.h>
-#define GPIOPinOne 3
+#define GPIOPinOne 19
 CKernel::CKernel (void)
 {
 }
