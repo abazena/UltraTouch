@@ -58,12 +58,13 @@ boolean CKernel::Initialize (void)
 	DecoderEnableTwo.Write(0);
 	return TRUE;
 }
-int UpdateOutput(byte output[8])
+int UpdateOutput(unsigned output)
 {
 	for (int i = 0; i++; i<8)
 	{
 		OutputPins[i].Write(output[i]);
   }
+	return 0;
 }
 int UpdatePulse(unsigned output)
 {
@@ -72,7 +73,7 @@ int UpdatePulse(unsigned output)
 		DecoderPins[0].Write(0);
 		DecoderPins[1].Write(0);
 		DecoderPins[2].Write(0);
-		MasterEnable.Write(1);
+		DecoderMasterEnable.Write(1);
 
 	}
 	else if(output == 2)
@@ -80,14 +81,14 @@ int UpdatePulse(unsigned output)
 		DecoderPins[0].Write(1);
 		DecoderPins[1].Write(0);
 		DecoderPins[2].Write(0);
-		MasterEnable.Write(1);
+		DecoderMasterEnable.Write(1);
 	}
 	else
 	{
 		DecoderPins[0].Write(0);
 		DecoderPins[1].Write(1);
 		DecoderPins[2].Write(0);
-		MasterEnable.Write(1);
+		DecoderMasterEnable.Write(1);
 	}
 	return 0;
 }
@@ -100,7 +101,8 @@ TShutdownMode CKernel::Run (void)
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
 	for (unsigned i = 1; i <= 1000; i++)
 	{
-		UpdateOutput( {0,0,0,0,0,0,0,0} );
+		unsigned[] output = {0,0,0,0,0,0,0,0};
+		UpdateOutput(output);
 		UpdatePulse(1);
 
 
