@@ -21,6 +21,14 @@
 #include <circle/gpiopin.h>
 #include <circle/timer.h>
 #define GPIOPinOne 19
+
+CGPIOPin MasterEnable (15 , GPIOModeOutput);
+CGPIOPin EnableOne (2 , GPIOModeOutput);
+CGPIOPin EnableTwo (17 , GPIOModeOutput);
+CGPIOPin InputOne (3 , GPIOModeOutput);
+CGPIOPin InputTwo (4 , GPIOModeOutput);
+CGPIOPin InputThree (14 , GPIOModeOutput);
+
 CKernel::CKernel (void)
 {
 }
@@ -33,6 +41,37 @@ boolean CKernel::Initialize (void)
 {
 	return TRUE;
 }
+int UpdatePulse(int output)
+{
+	if(output == 1)
+	{
+		MasterEnable.Write(1);
+		EnableOne.Write(0);
+		EnableTwo.Write(0);
+		InputOne.Write(0);
+		InputTwo.Write(0);
+		InputThree.Write(0);
+	}
+	else if(output == 2)
+	{
+		MasterEnable.Write(1);
+		EnableOne.Write(0);
+		EnableTwo.Write(0);
+		InputOne.Write(1);
+		InputTwo.Write(0);
+		InputThree.Write(0);
+	}
+	else
+	{
+		MasterEnable.Write(1);
+		EnableOne.Write(0);
+		EnableTwo.Write(0);
+		InputOne.Write(0);
+		InputTwo.Write(1);
+		InputThree.Write(0);
+	}
+	return 0;
+}
 
 TShutdownMode CKernel::Run (void)
 {
@@ -42,6 +81,7 @@ TShutdownMode CKernel::Run (void)
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
 	for (unsigned i = 1; i <= 1000; i++)
 	{
+		UpdatePulse(1);
 		GPIOOne.Write(1);
 		m_ActLED.On ();
 		CTimer::SimpleMsDelay (5000);
