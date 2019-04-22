@@ -58,7 +58,7 @@ boolean CKernel::Initialize (void)
 	DecoderEnableTwo.Write(0);
 	return TRUE;
 }
-int UpdateOutput(unsigned output)
+int UpdateOutput(int output[8])
 {
 	for (int i = 0; i++; i<8)
 	{
@@ -101,11 +101,12 @@ TShutdownMode CKernel::Run (void)
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
 	for (unsigned i = 1; i <= 1000; i++)
 	{
-		unsigned[] output = {0,0,0,0,0,0,0,0};
+		m_ActLED.On();
+		int output[] = {0,0,0,0,0,0,0,0};
 		UpdateOutput(output);
 		UpdatePulse(1);
-
-
+		m_ActLED.Off();
+		CTimer::SimpleMsDelay(200);
 
 		//GPIOOne.Write(1);
 		//m_ActLED.On ();
