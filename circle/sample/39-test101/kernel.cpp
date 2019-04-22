@@ -20,7 +20,7 @@
 #include "kernel.h"
 #include <circle/gpiopin.h>
 #include <circle/timer.h>
-
+#define GPIOPinOne 3
 CKernel::CKernel (void)
 {
 }
@@ -33,30 +33,23 @@ boolean CKernel::Initialize (void)
 {
 	return TRUE;
 }
-boolean Setup(void)
-{
-	CGPIOPin GpioOne (GPIOPinOne, GPIOModeOutput);
-	GpioOne.Invert();
-        return TRUE;
-}
 
 TShutdownMode CKernel::Run (void)
 {
 	CGPIOPin AudioLeft (GPIOPinAudioLeft, GPIOModeOutput);
 	CGPIOPin AudioRight (GPIOPinAudioRight, GPIOModeOutput);
-	CGPIOPin GPIOOne (3 , GPIOModeOutput);
+	CGPIOPin GPIOOne (GPIOPinOne , GPIOModeOutput);
 	// flash the Act LED 10 times and click on audio (3.5mm headphone jack)
 	for (unsigned i = 1; i <= 1000; i++)
 	{
-		GPIOOne.Invert();
-		CTimer::SimpleMsDelay(5000);
-		GPIOOne.Invert();
-		CTimer::SimpleMsDelay(5000);
+		GPIOOne.Write(1);
 		m_ActLED.On ();
+		CTimer::SimpleMsDelay (5000);
+		GPIOOne.Write(0);
+		m_ActLED.Off ();
 		AudioLeft.Invert ();
 		AudioRight.Invert ();
 		CTimer::SimpleMsDelay (5000);
-		m_ActLED.Off ();
 	}
 
 	return ShutdownReboot;
