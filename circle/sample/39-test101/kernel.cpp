@@ -51,14 +51,12 @@ TShutdownMode CKernel::Run (void)
 		GPIOOne.Write(LOW);
 		CTimer::SimpleMsDelay(500);
 		GPIOOne.Write(HIGH);
-		CTimer::SimpleMsDelay(1000);
+		CTimer::SimpleMsDelay(5000);
 		m_ActLED.On ();
 		AudioLeft.Invert ();
 		AudioRight.Invert ();
-		CTimer::SimpleMsDelay (200);
-
-		m_ActLED.Off ();
 		CTimer::SimpleMsDelay (5000);
+		m_ActLED.Off ();
 	}
 
 	return ShutdownReboot;
